@@ -42,6 +42,8 @@ static struct ctrl_dev *cdev = (struct ctrl_dev *)CTRL_DEVICE_BASE;
  */
 static int read_eeprom(struct am335x_baseboard_id *header)
 {
+    strncpy(header->name,"A335BNLT",HDR_NAME_LEN);
+    return;
 	/* Check if baseboard eeprom is available */
 	if (i2c_probe(CONFIG_SYS_I2C_EEPROM_ADDR)) {
 		puts("Could not probe the EEPROM; something fundamentally "
