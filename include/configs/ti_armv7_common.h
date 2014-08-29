@@ -268,6 +268,8 @@
 			"run scan_boot; " \
 			"run mmcboot;" \
 			"setenv mmcdev 1; " \
+			"setenv devnum 1;" \
+			"run scan_boot;" \
 			"setenv bootpart 1:2; " \
 			"run mmcboot;" \
 		"fi\0" \
