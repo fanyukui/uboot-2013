@@ -134,6 +134,11 @@ static struct module_pin_mux gpio0_7_pin_mux[] = {
 	{-1},
 };
 
+static struct module_pin_mux led_pin_mux[] = {
+	{OFFSET(gpmc_a4), (MODE(7) | PULLUDEN)},	/* GPIO1_21 */
+	{-1},
+};
+
 static struct module_pin_mux rgmii1_pin_mux[] = {
 	{OFFSET(mii1_txen), MODE(2)},			/* RGMII1_TCTL */
 	{OFFSET(mii1_rxdv), MODE(2) | RXACTIVE},	/* RGMII1_RCTL */
@@ -377,6 +382,10 @@ void enable_board_pin_mux(struct am335x_baseboard_id *header)
 		configure_module_pin_mux(mmc0_pin_mux_sk_evm);
 	} else if (board_is_bone_lt(header)) {
 		/* Beaglebone LT pinmux */
+#define GPIO_TO_PIN(bank, gpio) (32 * (bank) + (gpio))
+        configure_module_pin_mux(led_pin_mux);
+        gpio_direction_output(GPIO_TO_PIN(1,21));
+        gpio_set_value(GPIO_TO_PIN(1,21), 1);
 		configure_module_pin_mux(i2c1_pin_mux);
 		configure_module_pin_mux(mii1_pin_mux);
 		configure_module_pin_mux(mmc0_pin_mux);
