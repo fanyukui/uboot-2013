@@ -50,6 +50,7 @@
  */
 #define CONFIG_SPL_TEXT_BASE		0x402F0400
 #define CONFIG_SPL_MAX_SIZE		(0x4030B800 - CONFIG_SPL_TEXT_BASE)
+#define CONFIG_CMD_EXT4_WRITE
 
 /*
  * Since SPL did pll and ddr initialization for us,
