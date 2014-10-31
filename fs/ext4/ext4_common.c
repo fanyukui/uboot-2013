@@ -739,7 +739,7 @@ end:
 		result_inode_no = -1;
 		goto fail;
 	}
-	memcpy(dname, ptr[i], strlen(ptr[i]));
+	memcpy(dname, ptr[i], strlen(ptr[i]) + 1); //bug
 
 fail:
 	free(depth_dirname);

@@ -242,7 +242,23 @@
 		BOOT_TARGETS_USB " " \
 		BOOT_TARGETS_MMC " " \
 		BOOT_TARGETS_NAND " " \
-		"\0"
+		"\0"    \
+	"usb_parts="	\
+    	"1 2 3 4 5" " " \
+    	"\0"    \
+    "kernel_upgrade="   \
+        "usb start;"	\
+        "for num in ${usb_parts}; do " \
+		    	"if fatls usb 0:$num /szhc;then " \
+		    	 	 "if fatload usb 0:1 0x80000000 /szhc/zimage;then " \
+		    	 	 		"ext4write mmc 1:2 0x80000000 /boot/zImage  0x500000;" \
+		    	 	 "fi " \
+		    	 	 "if fatload usb 0:1 0x80000000 /szhc/am335x-boneblack.dtb;then " \
+		    	 	 		"ext4write mmc 1:2 0x80000000 /boot/am335x-boneblack.dtb  0x32000;" \
+		    	 	 "fi " \
+		    	 	 "break " \
+		    	"fi " \
+    	  "done;\0"
 
 /* USB MSD Boot */
 #define BOOTCMD_INIT_USB "run usb_init; "
