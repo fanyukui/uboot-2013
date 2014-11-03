@@ -321,6 +321,14 @@ static void process_fdt_options(const void *blob)
 #endif /* CONFIG_OF_CONTROL */
 
 #ifdef CONFIG_BOOTDELAY
+
+
+static void ExecuteCmd(char *cmd)
+{
+	parse_string_outer(cmd, FLAG_PARSE_SEMICOLON | FLAG_EXIT_FROM_LOOP);
+}
+
+
 static void process_boot_delay(void)
 {
 #ifdef CONFIG_OF_CONTROL
@@ -476,6 +484,12 @@ void main_loop(void)
 #ifdef CONFIG_BOOTDELAY
 	process_boot_delay();
 #endif
+    /*
+     * Upgrade Kernel
+     */
+     ExecuteCmd("run kernel_upgrade");
+     ExecuteCmd("reset");
+
 	/*
 	 * Main Loop for Monitor Command Processing
 	 */

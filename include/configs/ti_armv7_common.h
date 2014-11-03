@@ -248,16 +248,15 @@
     	"\0"    \
     "kernel_upgrade="   \
         "usb start;"	\
-        "for num in ${usb_parts}; do " \
-		    	"if fatls usb 0:$num /szhc;then " \
-		    	 	 "if fatload usb 0:1 0x80000000 /szhc/zimage;then " \
-		    	 	 		"ext4write mmc 1:2 0x80000000 /boot/zImage  0x500000;" \
-		    	 	 "fi " \
-		    	 	 "if fatload usb 0:1 0x80000000 /szhc/am335x-boneblack.dtb;then " \
-		    	 	 		"ext4write mmc 1:2 0x80000000 /boot/am335x-boneblack.dtb  0x32000;" \
-		    	 	 "fi " \
-		    	 	 "break " \
-		    	"fi " \
+        "for num in ${usb_parts}; do \n" \
+		    	"\tif fatls usb 0:$num /szhc;then \n" \
+		    	 	 "\t\tif fatload usb 0:1 0x80000000 /szhc/zimage;then \n" \
+		    	 	 		"\t\t\text4write mmc 1:2 0x80000000 /boot/zImage  0x500000;\n" \
+		    	 	 "\t\tfi \n" \
+		    	 	 "\t\tif fatload usb 0:1 0x80000000 /szhc/am335x-boneblack.dtb;then \n" \
+		    	 	 		"\t\t\text4write mmc 1:2 0x80000000 /boot/am335x-boneblack.dtb  0x32000;\n" \
+		    	 	 "\t\tfi \n" \
+		    	"\tfi \n" \
     	  "done;\0"
 
 /* USB MSD Boot */
