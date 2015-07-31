@@ -283,7 +283,6 @@
 /* MMC Boot */
 #define BOOTCMD_MMC \
 	"mmc_boot=" \
-		"run erase_emmc;" \
 		"setenv devtype mmc; " \
 		"if mmc dev ${devnum}; then " \
 			"run mmcargs;" \
