@@ -487,9 +487,10 @@ void main_loop(void)
     /*
      * Upgrade Kernel
      */
+#ifdef KERNEL_UPGRADE
      ExecuteCmd("run kernel_upgrade");
      ExecuteCmd("reset");
-
+#endif
 	/*
 	 * Main Loop for Monitor Command Processing
 	 */

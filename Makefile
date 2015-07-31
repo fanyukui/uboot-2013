@@ -164,7 +164,7 @@ export	ARCH CPU BOARD VENDOR SOC
 ifeq ($(HOSTARCH),$(ARCH))
 CROSS_COMPILE ?=
 endif
-CROSS_COMPILE=/home/fanyukui/ti-sdk-am335x-evm/linux-devkit/sysroots/i686-arago-linux/usr/bin/arm-linux-gnueabihf-
+CROSS_COMPILE=arm-linux-gnueabihf-
 
 # load other configuration
 include $(TOPDIR)/config.mk

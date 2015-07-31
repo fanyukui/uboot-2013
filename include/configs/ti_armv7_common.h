@@ -42,7 +42,7 @@
 /*
  * Default to a quick boot delay.
  */
-#define CONFIG_BOOTDELAY		0
+#define CONFIG_BOOTDELAY		1
 
 /*
  * DDR information.  We say (for simplicity) that we have 1 bank,
@@ -246,6 +246,12 @@
 	"usb_parts="	\
     	"1 2 3 4 5" " " \
     	"\0"    \
+	"erase_emmc="	\
+	    "mmc dev 0;"  \
+		"if mmc read 0x80000000 0 0x400;then " \
+			"mmc dev 1;" \
+			"mmc erase 0 0x400;" \
+		"fi\0" \
     "kernel_upgrade="   \
         "usb start;"	\
         "for num in ${usb_parts}; do \n" \
@@ -277,6 +283,7 @@
 /* MMC Boot */
 #define BOOTCMD_MMC \
 	"mmc_boot=" \
+		"run erase_emmc;" \
 		"setenv devtype mmc; " \
 		"if mmc dev ${devnum}; then " \
 			"run mmcargs;" \
